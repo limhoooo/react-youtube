@@ -1,0 +1,16 @@
+.detail {
+  padding: 0.2em;
+  color: #fff;
+  max-width: 950px;
+}
+
+.description {
+  white-space: pre-wrap;
+}
+
+.colorWhite {
+    color: #fff;
+}
+.channelImg{
+  border-radius: 50px;
+}

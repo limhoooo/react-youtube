@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { memo } from 'react';
+import styles from './video_item.module.css'
 
-const VideoItem = (props) => {
+const VideoItem = memo(({ video, video: { snippet }, onVideoClick, display }) => {
+    const displayType = display === 'list' ? styles.list : styles.grid;
     return (
-        <h1>{props.video.snippet.title}</h1>
+        <li className={`${styles.container} ${displayType}`} onClick={() => onVideoClick(video)}>
+            <div className={styles.video}>
+                <img className={styles.thumbnail} src={snippet.thumbnails.medium.url}
+                    alt="video thumbnail" />
+                <div className={styles.metadata}>
+                    <div className={styles.metadataLeft}>
+                        <img className={styles.channelImg} src={video.channelImg} alt="channelImg" />
+                    </div>
+                    <div className={styles.metadataRight}>
+                        <p className={styles.title}>{snippet.title}</p>
+                        <p className={styles.channel}>{snippet.channelTitle}</p>
+                    </div>
+                </div>
+            </div>
+        </li>
     )
-}
+})
 
 export default VideoItem;
