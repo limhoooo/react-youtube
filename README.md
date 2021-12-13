@@ -1,5 +1,11 @@
 # 유투브 클론 코딩
-https://limhoooo-react-youtube.netlify.app/
+https://limhoooo-react-youtube.netlify.app/<br/>
+
+유투브 api 를 이용한 유투브 클론 사이트
+
+## 사용기술
+react, react-router, javascript , html, css 
+
 ## 유투브 api 인증
 'https://developers.google.cn/youtube/v3/getting-started?hl=ko' <br>
 and  <br>
