@@ -7,10 +7,9 @@ import axios from 'axios';
   responseFail : 응답 실패 
 */
 const key = 'AIzaSyDk0LODxj0Ynf--W3VQ4VInHOTGY8_4KCk';
-
 const API = axios.create({
   baseURL: 'https://www.googleapis.com/youtube/v3',
-  params: { key: key },
+  params: { key },
 });
 
 export { API };
