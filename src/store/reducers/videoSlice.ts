@@ -1,31 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { API } from '../../api';
+import { videoSearchType, videoType } from '../../types/videoType';
 
-interface videoSnippetType {
-  channelId: string;
-  title: string;
-  channelTitle: string;
-  description: string;
-  thumbnails: {
-    default: {
-      url: string;
-    };
-    medium: {
-      url: string;
-    };
-  };
-}
-export interface videoType {
-  etag: string;
-  id: string | { videoId: string };
-  key?: string;
-  kind: string;
-  channelImg: string;
-  snippet: videoSnippetType;
-}
-export interface videoSearchType extends videoType {
-  id: { videoId: string };
-}
+// 채널 정보 넣어주는 Fnc
 const getChannelsList = async (items: videoType[]) => {
   // 받아온 videos의 id List 를 string 배열화
   const channelIdString = items.map((item: videoType) => {
@@ -40,18 +17,16 @@ const getChannelsList = async (items: videoType[]) => {
   });
   // 받아온 videos의 해당하는 channels data 를 넣어줌
   const responseData = items;
-  const channelsData: videoType[] = channelsListData.data.items;
-  for (let i = 0; i < responseData.length; i++) {
-    for (let j = 0; j < channelsData.length; j++) {
-      if (responseData[i].snippet.channelId === channelsData[j].id) {
-        responseData[i]['channelImg'] = channelsData[j].snippet.thumbnails.default.url;
-        break;
-      }
+  const channelsData = channelsListData.data.items;
+  responseData.forEach(item => {
+    const channel = channelsData.find((channel: videoType) => channel.id === item.snippet.channelId);
+    if (channel) {
+      item.channelImg = channel.snippet.thumbnails.default.url;
     }
-  }
+  });
   return responseData;
 };
-
+// GET 인기있는 동영상 리스트
 export const getMostPopular = createAsyncThunk('video/getMostPopular', async () => {
   const { data } = await API.get(`/videos`, {
     params: {
@@ -63,6 +38,7 @@ export const getMostPopular = createAsyncThunk('video/getMostPopular', async () 
   const channelsData = await getChannelsList(data.items);
   return channelsData;
 });
+// GET Search 동영상
 export const getVideoSaerch = createAsyncThunk('video/getVideoSaerch', async (query: string) => {
   const { data } = await API.get('/search', {
     params: {
@@ -78,10 +54,16 @@ export const getVideoSaerch = createAsyncThunk('video/getVideoSaerch', async (qu
     id: item.id.videoId,
   }));
 });
-const initialState = {
+
+interface initialStateType {
+  videoList: videoType[];
+  loading: boolean;
+}
+const initialState: initialStateType = {
   videoList: [],
   loading: false,
 };
+
 const videoSlice = createSlice({
   name: 'videoSlice',
   initialState,

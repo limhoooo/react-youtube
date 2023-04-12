@@ -17,3 +17,7 @@ React (18v) <br>
 React-toolKit <br>
 TypeScript <br>
 Axios <br>
+
+예정<br>
+nuxt.js <br>
+styledComponenet<br>

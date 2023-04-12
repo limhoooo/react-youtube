@@ -4,7 +4,8 @@ import SearchHeader from './components/search_header/search_header';
 import VideoDetail from './components/video_detail/video_detail';
 import VideoList from './components/video_list/video_list';
 import { useAppDispatch, useAppSelector } from './hook/hooks';
-import { getMostPopular, videoType } from './store/reducers/videoSlice';
+import { getMostPopular } from './store/reducers/videoSlice';
+import { videoType } from './types/videoType';
 
 function App() {
   const dispatch = useAppDispatch();

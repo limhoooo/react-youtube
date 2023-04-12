@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './video_detail.module.css';
-import { videoType } from './../../store/reducers/videoSlice';
+import { videoType } from './../../types/videoType';
 interface PropsType {
   video: videoType;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import VideoItem from '../video_item/video_item';
 import styles from './video_list.module.css';
-import { videoType } from './../../store/reducers/videoSlice';
+import { videoType } from './../../types/videoType';
 
 interface PropsType {
   videos: videoType[];

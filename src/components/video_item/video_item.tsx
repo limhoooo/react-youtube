@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import styles from './video_item.module.css';
-import { videoType } from './../../store/reducers/videoSlice';
+import { videoType } from './../../types/videoType';
 
 interface PropsType {
   onVideoClick: (video: videoType) => void;
