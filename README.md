@@ -14,6 +14,7 @@ https://limhoooo-youtube.netlify.app/<br/>
 - TypeScript <br>
 - Axios <br>
 - styledComponenet<br>
+- Netlify <br>
 - nuxt.js (도입예정)<br>
 
 ## 유투브 api 인증
