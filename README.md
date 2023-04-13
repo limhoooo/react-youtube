@@ -5,7 +5,7 @@
 
 ## DEMO
 
-https://limhoooo-react-youtube.netlify.app/<br/>
+https://limhoooo-youtube.netlify.app/<br/>
 
 ## 사용기술
 
