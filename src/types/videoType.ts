@@ -12,6 +12,7 @@ interface videoSnippetType {
     };
   };
 }
+
 export interface videoType {
   etag: string;
   id: string | { videoId: string };

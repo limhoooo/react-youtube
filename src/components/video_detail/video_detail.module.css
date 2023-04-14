@@ -2,6 +2,7 @@
   padding: 0.2em;
   color: #fff;
   max-width: 950px;
+  flex: 1 1 70%;
 }
 
 .description {
@@ -9,8 +10,8 @@
 }
 
 .colorWhite {
-    color: #fff;
+  color: #fff;
 }
-.channelImg{
+.channelImg {
   border-radius: 50px;
 }
