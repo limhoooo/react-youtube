@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { API } from '../../api';
-import { videoSearchType, videoType } from '../../types/videoType';
+import { videoType } from '../../types/videoType';
 import _ from 'lodash';
 import { GET_CHANNEL_INFOLIST, GET_SEARCH_VIDEOLIST, GET_VIDEOLIST } from '../../api/video/videoApi';
 
@@ -47,6 +46,7 @@ export const getVideoSaerchPreview = createAsyncThunk('video/getVideoSaerchPrevi
         maxResults: 5,
         type: 'video',
         q: query,
+        intitle: query,
       },
     });
     return data.items;

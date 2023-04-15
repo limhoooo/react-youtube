@@ -45,15 +45,36 @@
   padding: 0.5em 0.2em;
   filter: brightness(0.5);
 }
-.searchBoxPreview {
+.searchBoxPreviewBox {
   position: absolute;
   background-color: #fff;
   top: 37px;
-  color: #333;
-  border: 1px solid;
   left: 0;
   width: 100%;
+  border: 1px solid #333;
+}
+.searchBoxPreview {
+  color: #333;
+  border-bottom: 1px solid;
+  font-size: 14px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.searchBoxPreview:last-child {
+  border-bottom: none;
 }
 .searchBoxPreview p {
-  border-top: 1px solid;
+  margin: 0;
+  padding: 0;
+}
+.searchBoxPreview .channelTitle {
+  font-size: 12px;
+}
+.searchBoxPreview .searchBoxPreviewIcon {
+  filter: brightness(0.5);
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
 }

@@ -3,7 +3,6 @@ import React, { useRef, KeyboardEvent } from 'react';
 import { memo, useEffect, useCallback, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hook/hooks';
 import { getVideoSaerch, getChannelsList, videoActions, getVideoSaerchPreview } from '../../store/reducers/videoSlice';
-import { unwrapResult } from '@reduxjs/toolkit';
 
 interface Props {
   onLogoClickFnc: () => void;
@@ -11,7 +10,7 @@ interface Props {
 
 const SearchHeader = memo(({ onLogoClickFnc }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const searchList = useAppSelector(video => video.video.searchList);
+  const searchList = useAppSelector(state => state.video.searchList);
   const [search, setSearch] = useState('');
   const dispatch = useAppDispatch();
   const handleSearch = async () => {
@@ -30,20 +29,23 @@ const SearchHeader = memo(({ onLogoClickFnc }: Props) => {
   const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
-  // 디바운싱
+  const onClickPreview = (value: string) => {
+    setSearch(value);
+    handleSearch();
+  };
+  const getVideoSaerchPreviewFnc = useCallback(async () => {
+    await dispatch(search ? getVideoSaerchPreview(search) : videoActions.initSearchList());
+  }, [dispatch, search]);
+
+  // 디바운싱 검색기능
   useEffect(() => {
     const indentifier = setTimeout(() => {
-      if (search) {
-        dispatch(getVideoSaerchPreview(search));
-      } else {
-        dispatch(videoActions.initSearchList());
-      }
+      getVideoSaerchPreviewFnc();
     }, 500);
-
     return () => {
       clearTimeout(indentifier);
     };
-  }, [dispatch, search]);
+  }, [getVideoSaerchPreviewFnc]);
   return (
     <header className={styles.header}>
       <div className={styles.logo} onClick={onLogoClick}>
@@ -54,7 +56,7 @@ const SearchHeader = memo(({ onLogoClickFnc }: Props) => {
         <input
           ref={inputRef}
           className={styles.input}
-          type="search"
+          type="text"
           value={search}
           placeholder="Search..."
           onChange={onChangeSearch}
@@ -63,14 +65,19 @@ const SearchHeader = memo(({ onLogoClickFnc }: Props) => {
         <button className={styles.button} type="submit" onClick={handleSearch}>
           <img className={styles.buttonImg} src="/images/search.png" alt="search" />
         </button>
-        {searchList.length !== 0 && (
-          <div className={styles.searchBoxPreview}>
+        {searchList && searchList.length !== 0 && (
+          <div className={styles.searchBoxPreviewBox}>
             {searchList.map((item, index) => (
-              <p key={index}>{item.snippet.title}</p>
+              <div key={index} className={styles.searchBoxPreview} onClick={() => onClickPreview(item.snippet.title)}>
+                <img className={styles.searchBoxPreviewIcon} src="/images/search.png" alt="search" />
+                <div>
+                  <p className={styles.searchTitle}>{item.snippet.title}</p>
+                  <p className={styles.channelTitle}>{item.snippet.channelTitle}</p>
+                </div>
+              </div>
             ))}
           </div>
         )}
-        <div></div>
       </div>
     </header>
   );
