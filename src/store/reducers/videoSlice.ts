@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { videoType } from '../../types/videoType';
+import { videoSearchType, videoType } from '../../types/videoType';
 import _ from 'lodash';
 import { GET_CHANNEL_INFOLIST, GET_SEARCH_VIDEOLIST, GET_VIDEOLIST } from '../../api/video/videoApi';
 
 interface getChannelsListType {
-  items: videoType[];
+  items: videoSearchType[];
   type: string;
 }
 
@@ -61,7 +61,7 @@ export const getChannelsList = createAsyncThunk(
   async ({ items, type }: getChannelsListType) => {
     try {
       // 받아온 videos의 id List 를 string 배열화
-      const channelIdString = items.map((item: videoType) => {
+      const channelIdString = items.map((item: videoSearchType) => {
         return item.snippet.channelId;
       });
       const concatString = channelIdString.join();
@@ -83,7 +83,7 @@ export const getChannelsList = createAsyncThunk(
       });
 
       if (type === 'search') {
-        return responseData.map((item: any) => ({
+        return responseData.map((item: videoSearchType) => ({
           ...item,
           id: item.id.videoId,
         }));
