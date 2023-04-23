@@ -6,7 +6,7 @@ import VideoList from './components/video_list/video_list';
 import { useAppDispatch, useAppSelector } from './hook/hooks';
 import { getMostPopular, getChannelsList } from './store/reducers/videoSlice';
 import { videoType } from './types/videoType';
-
+// styled
 const AppStyled = styled.div`
   max-width: 80rem;
 `;
