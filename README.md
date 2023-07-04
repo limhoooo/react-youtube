@@ -13,7 +13,7 @@ https://limhoooo-youtube.netlify.app/<br/>
 - React-toolKit <br>
 - TypeScript <br>
 - Axios <br>
-- styledComponenet<br>
+- StyledComponenet<br>
 - Netlify <br>
 
 ## 유투브 api 인증
